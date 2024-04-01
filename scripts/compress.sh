@@ -19,4 +19,4 @@ ch2=`printf '%03o' $((0x$ch2))`
 ch3=`printf "%08x\n" $dec_size | sed 's/\(..\)/\1 /g' | awk '{ printf $1 }'`
 ch3=`printf '%03o' $((0x$ch3))`
 
-(cat ${FILE} | ${ALGO} -9 -k -f && printf \\$ch0\\$ch1\\$ch2\\$ch3) > ${FILE}.${ALGO}
+(cat ${FILE} | /usr/bin/lzma -9 -k -f && printf \\$ch0\\$ch1\\$ch2\\$ch3) > ${FILE}.${ALGO}
