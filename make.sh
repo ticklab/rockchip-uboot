@@ -140,6 +140,10 @@ function process_args()
 					shift 1
 				fi
 				;;
+			RKBIN_TOOLS=*) # set RKBIN_TOOLS
+				RKBIN_TOOLS=${1#*=}
+				shift 1
+				;;
 			# '': build with exist .config
 			# loader|trust|uboot: pack image
 			# debug*|map|sym|elf*|nm: debug command
