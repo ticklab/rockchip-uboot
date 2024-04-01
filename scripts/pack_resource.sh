@@ -4,6 +4,7 @@
 #
 # SPDX-License-Identifier: GPL-2.0
 #
+set -e
 
 RSCE_OLD=$1
 RSCE_NEW=resource.img
@@ -11,7 +12,15 @@ RSCE_NEW=resource.img
 BOOT_OLD=$1
 BOOT_NEW=boot.img
 
-TOOL=../rkbin/tools/resource_tool
+if [ -d ${RKBIN_TOOLS} ]; then
+	absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
+	RKBIN=${absolute_path}
+else
+	RKBIN=../rkbin
+	echo "warning: use ../rkbin repository"
+fi
+
+TOOL=${RKBIN}/tools/resource_tool
 IMAGES=./tools/images/
 TMP_DIR=.resource_tmp
 TMP_DIR2=.boot_tmp

@@ -7,6 +7,14 @@
 
 set -e
 
+if [ -d ${RKBIN_TOOLS} ]; then
+	absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
+	RKBIN=${absolute_path}
+else
+	RKBIN=../rkbin
+	echo "warning: use ../rkbin repository"
+fi
+
 if [ $# -eq 0 ]; then
 	echo "ERROR: No args of $0"
 	exit 1
@@ -50,6 +58,6 @@ if [ ${BIN_KB} -gt ${MAX_KB} ]; then
 	exit 1
 fi
 
-../rkbin/tools/loaderimage --pack --uboot u-boot.bin uboot.img ${LOAD_ADDR} ${SIZE}
+${RKBIN}/tools/loaderimage --pack --uboot u-boot.bin uboot.img ${LOAD_ADDR} ${SIZE}
 echo "pack uboot okay! Input: u-boot.bin"
 echo

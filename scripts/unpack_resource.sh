@@ -5,10 +5,19 @@
 # SPDX-License-Identifier: GPL-2.0
 #
 
+set -e
+
+if [ -d ${RKBIN_TOOLS} ]; then
+	absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
+	RKBIN=${absolute_path}
+else
+	RKBIN=../rkbin
+	echo "warning: use ../rkbin repository"
+fi
 
 IMAGE_FILE=$1
 OUTPUT_DIR=$2
-PACK_TOOL=../rkbin/tools/resource_tool
+PACK_TOOL=${RKBIN}/tools/resource_tool
 
 usage()
 {
