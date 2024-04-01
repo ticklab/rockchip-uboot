@@ -7,9 +7,8 @@
 
 set -e
 
-if [ -d ${RKBIN_TOOLS} ]; then
-	absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
-	RKBIN=${absolute_path}
+if [ -d ${RKBIN_PATH} ]; then
+	RKBIN=${RKBIN_PATH}
 else
 	RKBIN=../rkbin
 	echo "warning: use ../rkbin repository"

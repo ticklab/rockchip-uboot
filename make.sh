@@ -11,7 +11,7 @@ SUPPORT_LIST=`ls configs/*[r,p][x,v,k][0-9][0-9]*_defconfig`
 CMD_ARGS=$1
 
 ########################################### User can modify #############################################
-RKBIN_TOOLS=../rkbin/tools
+RKBIN_PATH=../rkbin
 CROSS_COMPILE_ARM32=../prebuilts/gcc/linux-x86/arm/gcc-linaro-6.3.1-2017.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 CROSS_COMPILE_ARM64=../prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 ########################################### User not touch #############################################
@@ -102,10 +102,9 @@ function filt_val()
 
 function prepare()
 {
-	if [ -d ${RKBIN_TOOLS} ]; then
-		export RKBIN_TOOLS=${RKBIN_TOOLS}
-		absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
-		RKBIN=${absolute_path}
+	if [ -d ${RKBIN_PATH} ]; then
+		export RKBIN_PATH=${RKBIN_PATH}
+		RKBIN=${RKBIN_PATH}
 	else
 		echo "ERROR: No ../rkbin repository"
 		exit 1
@@ -141,8 +140,8 @@ function process_args()
 					shift 1
 				fi
 				;;
-			RKBIN_TOOLS=*) # set RKBIN_TOOLS
-				RKBIN_TOOLS=${1#*=}
+			RKBIN_PATH=*) # set RKBIN_TOOLS
+				RKBIN_PATH=${1#*=}
 				shift 1
 				;;
 			# '': build with exist .config
