@@ -103,6 +103,7 @@ function filt_val()
 function prepare()
 {
 	if [ -d ${RKBIN_TOOLS} ]; then
+		export RKBIN_TOOLS=${RKBIN_TOOLS}
 		absolute_path=$(cd `dirname ${RKBIN_TOOLS}`; pwd)
 		RKBIN=${absolute_path}
 	else
